@@ -13,10 +13,12 @@ final class EventsViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     private let viewModel: EventsViewModel = EventsViewModel()
+    private let navigationPresenter = NavigationPresenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        navigationPresenter.hideNavBar(from: self, isHidden: true)
         configureCollectionView()
         viewModel.fetchEvents { [unowned self]result in
             switch result {
@@ -68,5 +70,9 @@ extension EventsViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width, height: 96)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        navigationPresenter.navigateToEventDetail(with: viewModel.events[indexPath.row], from: self, animated: true)
     }
 }

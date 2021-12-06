@@ -11,6 +11,7 @@ extension Date {
     func formatted() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM dd, yyyy 'at' h:mm a"
+        dateFormatter.timeZone = TimeZone.current
         return dateFormatter.string(from: self)
     }
 }

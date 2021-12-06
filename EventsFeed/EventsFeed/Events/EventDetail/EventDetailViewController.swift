@@ -29,6 +29,9 @@ class EventDetailViewController: UIViewController {
     }
     
     private func setupView() {
+        shareButton.setTitle("", for: .normal)
+        backButton.setTitle("", for: .normal)
+        backButton.layer.masksToBounds = true
         backButton.layer.cornerRadius = 16
     }
     private func update() {
